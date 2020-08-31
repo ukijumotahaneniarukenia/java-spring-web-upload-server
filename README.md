@@ -3,6 +3,9 @@ uploadをserveするアプリ
 
 bintrayみたいな感じで使う
 
+- http://192.168.1.109:8080/
+
+- http://localhost:8080/
 
 ポータブルな単一実行可能なjarファイルの作成
 
