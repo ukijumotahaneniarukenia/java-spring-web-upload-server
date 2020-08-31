@@ -34,10 +34,8 @@ public class FileUploadController {
         //https://stackoverflow.com/questions/48963242/cannot-access-templates-running-spring-boot-with-jar
         modelAndView.setViewName("uploadForm.html");//NOTE: no slash
 
-
-        model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toUri().toString())
+        model.addAttribute("files", storageService.loadAll()
+                .map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList()));
 
         return modelAndView;

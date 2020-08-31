@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 public class NnnApplication {
 
 	@Bean
-	CommandLineRunner init(StorageService storageService) {
+	CommandLineRunner init(StorageService storageService,StorageProperties storageProperties) {
 		return (args) -> {
 //			storageService.deleteAll(); 洗い替え
 			storageService.init();

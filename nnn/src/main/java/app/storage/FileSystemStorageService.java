@@ -24,7 +24,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
-        this.rootLocation = Paths.get(properties.getLocation());
+        this.rootLocation = Paths.get(properties.getStoreLocation());
     }
 
     @Override
@@ -53,8 +53,9 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Stream<Path> loadAll() {
         try {
-            return Files.walk(this.rootLocation)
+            return Files.walk(this.rootLocation,1)
                     .filter(path -> !path.equals(this.rootLocation))
+                    .filter(path -> path.toFile().isFile())
                     .map(this.rootLocation::relativize);
         }
         catch (IOException e) {

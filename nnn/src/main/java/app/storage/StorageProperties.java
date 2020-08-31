@@ -5,13 +5,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("storage")
 public class StorageProperties {
 
-    private String location = "/home/aine/java-spring-web-upload-server/upload-files";
+    private static String STORE_PARENT_LOCATION = "/home/aine/java-spring-web-upload-server";
 
-    public String getLocation() {
-        return location;
+    private String storeLocation = STORE_PARENT_LOCATION + "/upload-files";
+
+    public String getStoreLocation() {
+        return storeLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setStoreLocation(String location) {
+        this.storeLocation = location;
     }
 }
