@@ -1,2 +1,2 @@
-# java-spring-web-upload-server-mysql
+# java-spring-web-upload-server
 uploadをserveするアプリ
