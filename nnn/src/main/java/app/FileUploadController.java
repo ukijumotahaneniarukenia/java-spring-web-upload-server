@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,14 +28,19 @@ public class FileUploadController {
     }
 
     @GetMapping("/")
-    public String listUploadedFiles(Model model) throws IOException {
+    public ModelAndView listUploadedFiles(Model model) throws IOException {
+
+        ModelAndView modelAndView = new ModelAndView();
+        //https://stackoverflow.com/questions/48963242/cannot-access-templates-running-spring-boot-with-jar
+        modelAndView.setViewName("uploadForm.html");//NOTE: no slash
+
 
         model.addAttribute("files", storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                         "serveFile", path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList()));
 
-        return "uploadForm";
+        return modelAndView;
     }
 
     @GetMapping("/files/{filename:.+}")
